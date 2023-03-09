@@ -1,53 +1,186 @@
 ------- Aula 1 (O que é um Banco de Dados?) -------
--> 
+-> Arquivos guardam tabelas, tabelas armazenam registros
+-> Acesso direto - forma de armazenar fichas que facilitavam o acesso direto a um índice de ficha
+-> Em um banco de dados precisamos de:
+    -> Base de Dados - onde os dados ficam
+    -> Sistema Gerenciador - que gerencia os dados
+    -> Linguagem de Exploração - linguagem de acesso a dados
+    -> Programas adicionais - tudo que for extra de acordo com o software
+-> Existem três modelos de dados criados pela IBM:
+    -> Modelo Hierárquico - dados interligados de forma hierárquica
+    -> Modelo em Rede - dados interligados sem nenhuma forma hierárquica
+    -> Depois:
+        -> Modelo Relacional - dados que são relacionados um ao outro
+        -> Modelo Baseado em Documentos - 
+        -> Modelo Orientado a Objeto - 
+-> O SQL já teve vários nomes, como:
+    -> Structured English Query Language (SQUEL)
+    -> Structured Query Language (SQL)
+-> Existem outros bancos de dados como:
+    -> Pagos:
+        -> Oracle
+        -> IBM
+        -> dBASE
+        -> Microsoft SQL Server
+    -> Gratuitos:
+        -> MySQL
+        -> MariaDB
+        -> Firebird
+        -> PostgreeSQL
+
+
+
 
 ------- Aula 2.1 (Instalando o MySQL com WAMP) -------
--> 
+-> Estrutura do SQL:
+    -> DDL (Data Definition Language) - Definição - criar um banco de dados, criar uma tabela e etc (Qualquer coisa que altere a definição do banco de dados)
+        -> CREATE TABLE, CREATE DATABASE
+    -> DML (Data Manipulation Language) - Manipulação - para manipulação dos dados do banco de dados
+        -> INSERT INTO
+    -> DQL (Data Query Language) - Solicitações - para consultar o banco de dados
+    -> DCL (Data Control Language) - Controle - todos os tipos de acessos de dados que cada tipo de usuário vai ter
+    -> DTL (Data Transaction Language) - Transações - qualquer solicitação que pode ser feita a um banco de dados e respondendo da melhor maneira possível utilizando dos outros 4 princípios (DICA)
+        -> Durabilidade - todo dado que é inserido, alterado ou manipulado tem que permanecer durável
+        -> Isolamento - duas transações podem ser executadas ao mesmo tempo, tem de permancerem isoladas umas das outras
+        -> Consistência - toda transação precisa levar o banco de um estado consistente a outro consistente, se tudo estava bem, então deve continuar bem
+        -> Atomicidade - ou todas as ações são executadas, ou nada acontece
+
+
+
 
 ------- Aula 2.2 (Instalando o XAMPP) -------
--> 
+
 
 ------- Aula 3 (Criando o primeiro Banco de Dados) -------
--> 
+-> Dar ponto e vírgula(;) toda vez que finalizar um comando de linha
+-> Tipos de dados do SQL:
+    -> Numéricos:
+        -> Inteiro
+            -> TinyInt, SmallInt, Int, MediumInt, BigInt
+        -> Real
+            -> Decimal, Float, Double, Real
+        -> Lógico
+            -> Bit, Boolean
+    -> Data/Tempo
+            -> Date, DateTime, TimeStamp, Time, Year
+    -> Literal:
+        -> Caractere
+            -> Char, VarChar (Char é tamanho fixo e VarChar é tamanho variável)
+        -> Texto
+            -> TinyText, Text, MediumText, LongText
+        -> Binário
+            -> Blob, TinyBlob, MediumBlob, LongBlob
+        -> Coleção
+            -> Enum, Set (para fazer valores específicos permitidos)
+    -> Espacial:
+        -> Geometry, Point, Polygon, MultiPolygon
+
+--- SQL ---
+-> CREATE - palavra reservada para criação
+    -> CREATE DATABASE banco - para criar uma base de dados com nome "banco"
+        -> CREATE DATABASE banco DEFAULT CHARACTER SET utf8mb3 DEFAULT COLLATE utf8mb4_general_ci; - para ter um banco de dados voltado para a formatação UTF-8, que tem as regras de acentuação, "DEFAULT CHARACTER SET utf8mb4" e "DEFAULT COLLATE utf8mb4_general_ci" são constraints, e o "DEFAULT COLLATE utf8mb4_general_ci" é para definição dos caracteres de modo geral, para todas as linguagens mais atualizadas
+    -> CREATE TABLE tabela - cria uma tabela com o nome de "tabela"
+        -> CREATE TABLE tabela(tipo1 varchar(20), tipo2 int, tipo3 float ...) - para criar uma tabela já com os atributos dentro
+            -> CREATE TABLE tabela(tipo1 varchar(20), tipo2 int, tipo3 float ...) DEFAULT CHARSET = utf8mb4 - para definir a tabela que tem regras do utf-8 mais atualizadas
+-> USE banco - para fazer com que os comandos que foram digitados naquele momento estejam em uso do "banco" que já existe
+-> DESCRIBE tabela - para mostrar a descrição da "tabela" que existe no "banco"
+
+--- SQL cmd ---
+-> Aceita todos os comandos do SQL Workbench ou PHPMyAdmin
+-> show databases - para mostrar os bancos atuais
+-> status - para mostrar as informações do banco atual
+-> show tables - para mostrar as tabelas atuais do banco atual
+-> exit - para sair do cmd
+
+
+
 
 ------- Aula 4 (Melhorando a Estrutura do Banco de Dados) -------
--> 
+-> Existem constraints diferentes para cada tipo de dado no SQL, sendo eles:
+    -> NOT NULL - para indicar que o campo não pode ser nulo
+    -> DEFAULT 'Brasil' - para colocar o valor padrão como 'Brasil'
+    -> AUTO_INCREMENT - para incrementar a cada criação de dado (geralmente usado no id de cada tabela)
+-> É possível colocar nome de tabelas e de atributos com acentuação, no entanto para colocar o nome ou atributo é necessário usar crase (``)
+-> Sempre criar um 'id' para todas as tabelas para que cada dado seja único
+
+--- SQL ---
+-> DROP - para deletar algo
+    -> DROP DATABASE banco - para deletar o "banco" desejado
+-> enum('M', 'F') - só aceita valores M e F
+-> decimal(5, 2) - o número terá 5 casas, 3 inteiras e 2 decimais(999,99)
+-> PRIMARY KEY (id) - indica a chave primária da tabela, 
+
+
+
 
 ------- Aula 5 (Inserindo Dados na Tabela (INSERT INTO)) -------
--> 
+-> Se o ID estiver com a constraint AUTO_INCREMENT, então quando for inserir um novo dado na tabela, não precisará de passar por parâmetro no INSET INTO nem no VALUES (mas se quiser colocar, tome cuidado, use o dentro do VALUES o valor DEFAULT para inserir)
+
+--- SQL ---
+-> INSERT INTO tabela(tipo1, tipo2, tipo3 ...) VALUES ('1', '2', 'a' ...), ... - para inserir um ou mais dados na tabela nas colunas específicas
+    -> INSERT INTO tabela VALUES ('1', '2', 'a' ...), ... - para inserir um ou mais dados na tabela tendo que preencher todos os campos para a inserção
+-> SELECT * FROM tabela - para consultar todos os dados dentro da "tabela"
+
+
+
 
 ------- Aula 6 (Alterando a Estrutura da Tabela (ALTER TABLE e DROP TABLE)) -------
 -> 
 
+--- SQL ---
+->
 ------- Aula 7 (Manipulando Linhas (UPDATE, DELETE e TRUNCATE)) -------
 -> 
 
+--- SQL ---
+->
 ------- Aula 8 (Gerenciando Cópias de Segurança MySQL) -------
 -> 
 
+--- SQL ---
+->
 ------- Aula 9 (PHPMyAdmin (Parte 1)) -------
 -> 
 
+--- SQL ---
+->
 ------- Aula 10 (PHPMyAdmin (Parte 2)) -------
 -> 
 
+--- SQL ---
+->
 ------- Exercício para curso de MySQL -------
 -> 
 
+--- SQL ---
+->
 ------- Aula 11 (SELECT (Parte 1)) -------
 -> 
 
+--- SQL ---
+->
 ------- Aula 12 (SELECT (Parte 2)) -------
 -> 
 
+--- SQL ---
+->
 ------- Aula 13 (SELECT (Parte 3)) -------
 -> 
 
+--- SQL ---
+->
 ------- Aula 14 (Modelo Relacional) -------
 -> 
 
+--- SQL ---
+->
 ------- Aula 15 (Chaves Estrangeiras e JOIN) -------
 -> 
 
+--- SQL ---
+->
 ------- Aula 16 (INNER JOIN com várias tabelas) -------
 -> 
+
+--- SQL ---
+->
