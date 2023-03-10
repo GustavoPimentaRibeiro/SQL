@@ -34,7 +34,7 @@
 ------- Aula 2.1 (Instalando o MySQL com WAMP) -------
 -> Estrutura do SQL:
     -> DDL (Data Definition Language) - Definição - criar um banco de dados, criar uma tabela e etc (Qualquer coisa que altere a definição do banco de dados)
-        -> CREATE TABLE, CREATE DATABASE
+        -> CREATE TABLE, CREATE DATABASE, ALTER TABLE, DROP TABLE
     -> DML (Data Manipulation Language) - Manipulação - para manipulação dos dados do banco de dados
         -> INSERT INTO
     -> DQL (Data Query Language) - Solicitações - para consultar o banco de dados
@@ -82,8 +82,9 @@
     -> CREATE TABLE tabela - cria uma tabela com o nome de "tabela"
         -> CREATE TABLE tabela(tipo1 varchar(20), tipo2 int, tipo3 float ...) - para criar uma tabela já com os atributos dentro
             -> CREATE TABLE tabela(tipo1 varchar(20), tipo2 int, tipo3 float ...) DEFAULT CHARSET = utf8mb4 - para definir a tabela que tem regras do utf-8 mais atualizadas
+        -> CREATE TABLE IF EXISTS/IF NOT EXISTS tabela(tipo1 varchar(20), tipo2 int, tipo3 float ...) - para criar uma tabela se ela existir ou se ela não existir, criação situacional
 -> USE banco - para fazer com que os comandos que foram digitados naquele momento estejam em uso do "banco" que já existe
--> DESCRIBE tabela - para mostrar a descrição da "tabela" que existe no "banco"
+-> DESCRIBE/DESC tabela - para mostrar a descrição da "tabela" que existe no "banco"
 
 --- SQL cmd ---
 -> Aceita todos os comandos do SQL Workbench ou PHPMyAdmin
@@ -100,12 +101,15 @@
     -> NOT NULL - para indicar que o campo não pode ser nulo
     -> DEFAULT 'Brasil' - para colocar o valor padrão como 'Brasil'
     -> AUTO_INCREMENT - para incrementar a cada criação de dado (geralmente usado no id de cada tabela)
+    -> UNIQUE - para deixar a coluna que tenha somente nomes únicos, que eles não se repitam
+    -> UNSIGNED - para tirar o bit de sinal da mantissa do número
 -> É possível colocar nome de tabelas e de atributos com acentuação, no entanto para colocar o nome ou atributo é necessário usar crase (``)
 -> Sempre criar um 'id' para todas as tabelas para que cada dado seja único
 
 --- SQL ---
 -> DROP - para deletar algo
     -> DROP DATABASE banco - para deletar o "banco" desejado
+    -> DROP TABLE tabela - para deletar a "tabela" no banco atual
 -> enum('M', 'F') - só aceita valores M e F
 -> decimal(5, 2) - o número terá 5 casas, 3 inteiras e 2 decimais(999,99)
 -> PRIMARY KEY (id) - indica a chave primária da tabela, 
@@ -125,62 +129,88 @@
 
 
 ------- Aula 6 (Alterando a Estrutura da Tabela (ALTER TABLE e DROP TABLE)) -------
--> 
+-> Caso uma nova coluna receba a constraint NOT NULL e quer iniciá-la com um valor padrão, utilize a constraint "DEFAULT valor", sendo este "valor" qualquer coisa
 
 --- SQL ---
-->
+-> ALTER TABLE tabela - para alterar uma "tabela"
+    -> ALTER TABLE tabela ADD COLUMN profissao varchar(10) - para adicionar uma nova coluna "profissao" na tabela do tipo string variável de 10 posições (não precisa do ADD COLUMN para adicionar de fato, pode simplificar para somente ADD caso queira)
+        -> ALTER TABLE tabela ADD COLUMN profissao varchar(10) AFTER nome - para adicionar uma nova coluna "profissao" após a coluna "nome" na "tabela"
+        -> ALTER TABLE tabela ADD COLUMN profissao varchar(10) FIRST - para adicionar uma nova coluna "profissao" na primeira coluna da tabela
+    -> ALTER TABLE tabela DROP COLUMN profissao - para deletar a coluna "profissao" da "tabela"
+
+    -> ALTER TABLE tabela MODIFY COLUMN profissao varchar(20) - modifica a coluna "profissao" da "tabela" para uma string variável de 20 caracteres (só funciona para mudar a tipagem da coluna e as constraints, não funciona para renomear a coluna, também pode ocultar a palavra COLUMN do argumento caso queira simplificar)
+
+    -> ALTER TABLE tabela CHANGE COLUMN profissao prof varchar(20) - modifica o nome da coluna "profissao" para "prof" da "tabela", ela tem o poder de mudar o nome, tipo e constraints da coluna (pode ocultar o COLUMN caso queira)
+
+    -> ALTER TABLE tabela RENAME TO tab - renomeia a "tabela" para o nome "tab"
+
+    -> ALTER TABLE tabela ADD PRIMARY KEY(id) - para adicionar a coluna da chave primária "id" dentro da "tabela"
+
+
+
+
 ------- Aula 7 (Manipulando Linhas (UPDATE, DELETE e TRUNCATE)) -------
 -> 
 
 --- SQL ---
-->
+-> 
+
 ------- Aula 8 (Gerenciando Cópias de Segurança MySQL) -------
 -> 
 
 --- SQL ---
-->
+-> 
+
 ------- Aula 9 (PHPMyAdmin (Parte 1)) -------
 -> 
 
 --- SQL ---
-->
+-> 
+
 ------- Aula 10 (PHPMyAdmin (Parte 2)) -------
 -> 
 
 --- SQL ---
-->
+-> 
+
 ------- Exercício para curso de MySQL -------
 -> 
 
 --- SQL ---
-->
+-> 
+
 ------- Aula 11 (SELECT (Parte 1)) -------
 -> 
 
 --- SQL ---
-->
+-> 
+
 ------- Aula 12 (SELECT (Parte 2)) -------
 -> 
 
 --- SQL ---
-->
+-> 
+
 ------- Aula 13 (SELECT (Parte 3)) -------
 -> 
 
 --- SQL ---
-->
+-> 
+
 ------- Aula 14 (Modelo Relacional) -------
 -> 
 
 --- SQL ---
-->
+-> 
+
 ------- Aula 15 (Chaves Estrangeiras e JOIN) -------
 -> 
 
 --- SQL ---
-->
+-> 
+
 ------- Aula 16 (INNER JOIN com várias tabelas) -------
 -> 
 
 --- SQL ---
-->
+-> 
