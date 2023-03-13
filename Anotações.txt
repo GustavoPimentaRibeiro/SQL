@@ -146,6 +146,8 @@
 
     -> ALTER TABLE tabela ADD PRIMARY KEY(id) - para adicionar a coluna da chave primária "id" dentro da "tabela"
 
+    -> ALTER TABLE tabela DROP 'nome' - para excluir a coluna 'nome' da "tabela"
+
 
 
 
@@ -183,16 +185,20 @@
 
 
 ------- Aula 9 (PHPMyAdmin (Parte 1)) -------
--> 
+-> Para entrar no PHPMyAdmin do seu navegador é só digitar na barra de URL o seguinte endereço 'localhost/phpmyadmin', automaticamente você será redirecionado
 
---- SQL ---
--> 
+
+
 
 ------- Aula 10 (PHPMyAdmin (Parte 2)) -------
--> 
+-> Todos os comandos aceitos no MySQLWorkbench também são aceitos no cmd e no PHPMyAdmin
+-> Também é possível salvar uma cópia de backup pelo PHPMyAdmin utilizando quase da mesma ideia, é só clicar na aba "Exportar" no navegador e configurar como quer seu backup
 
---- SQL ---
--> 
+--- PHPMyAdmin(cmd) ---
+-> show create table tabela - para mostrar como foi feito a criação da "tabela" no console
+
+
+
 
 ------- Exercício para curso de MySQL -------
 -> 
