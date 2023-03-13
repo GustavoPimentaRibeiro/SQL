@@ -36,8 +36,9 @@
     -> DDL (Data Definition Language) - Definição - criar um banco de dados, criar uma tabela e etc (Qualquer coisa que altere a definição do banco de dados)
         -> CREATE TABLE, CREATE DATABASE, ALTER TABLE, DROP TABLE
     -> DML (Data Manipulation Language) - Manipulação - para manipulação dos dados do banco de dados
-        -> INSERT INTO, UPDATE, DELETE, TRUNCATE
+        -> INSERT INTO, UPDATE, DELETE, TRUNCATE, SELECT(alguns colocam)
     -> DQL (Data Query Language) - Solicitações - para consultar o banco de dados
+        -> SELECT
     -> DCL (Data Control Language) - Controle - todos os tipos de acessos de dados que cada tipo de usuário vai ter
     -> DTL (Data Transaction Language) - Transações - qualquer solicitação que pode ser feita a um banco de dados e respondendo da melhor maneira possível utilizando dos outros 4 princípios (DICA)
         -> Durabilidade - todo dado que é inserido, alterado ou manipulado tem que permanecer durável
@@ -201,16 +202,23 @@
 
 
 ------- Exercício para curso de MySQL -------
--> 
 
---- SQL ---
--> 
 
 ------- Aula 11 (SELECT (Parte 1)) -------
--> 
 
 --- SQL ---
--> 
+-> SELECT - para fazer uma seleção na "tabela" que deseja ver informações
+    -> SELECT * FROM tabela - mostra todos os dados da "tabela"
+        -> SELECT * FROM tabela ORDER BY coluna ASC - mostra todos os dados da "tabela" ordenado pela 'coluna' em ordem crescente
+            -> SELECT * FROM tabela ORDER BY coluna1, coluna2 - também é possível ordenar por duas ou mais colunas ao mesmo tempo
+        -> SELECT * FROM tabela ORDER BY coluna DESC - mostra todos os dados da "tabela" ordenado pela 'coluna' em ordem decrescente
+    -> SELECT coluna1, coluna2 FROM tabela - para mostrar apenas a 'coluna1' e 'coluna2' da "tabela"
+    -> SELECT * FROM tabela WHERE id='1' - para mostrar apenas registros que contém "id='1'", o 'WHERE' também aceita condicionais booleanas, como =, >, >=, <, <=, !=/<>, AND, OR
+        -> SELECT * FROM tabela WHERE id BETWEEN '1' AND '20' - para selecionar apenas os registros da "tabela" que tem 'id' entre '1' e '20', por isso a palavra 'BETWEEN'
+        -> SELECT * FROM tabela WHERE id IN ('1', '3') - para selecionar registros na "tabela" onde o 'id' tem o valor que está no conjunto descrito depois do 'IN', ou seja, '1' e '3'
+
+
+
 
 ------- Aula 12 (SELECT (Parte 2)) -------
 -> 
