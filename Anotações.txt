@@ -36,7 +36,7 @@
     -> DDL (Data Definition Language) - Definição - criar um banco de dados, criar uma tabela e etc (Qualquer coisa que altere a definição do banco de dados)
         -> CREATE TABLE, CREATE DATABASE, ALTER TABLE, DROP TABLE
     -> DML (Data Manipulation Language) - Manipulação - para manipulação dos dados do banco de dados
-        -> INSERT INTO
+        -> INSERT INTO, UPDATE, DELETE, TRUNCATE
     -> DQL (Data Query Language) - Solicitações - para consultar o banco de dados
     -> DCL (Data Control Language) - Controle - todos os tipos de acessos de dados que cada tipo de usuário vai ter
     -> DTL (Data Transaction Language) - Transações - qualquer solicitação que pode ser feita a um banco de dados e respondendo da melhor maneira possível utilizando dos outros 4 princípios (DICA)
@@ -150,16 +150,37 @@
 
 
 ------- Aula 7 (Manipulando Linhas (UPDATE, DELETE e TRUNCATE)) -------
--> 
 
 --- SQL ---
--> 
+-> UPDATE - para modificar uma linha da "tabela"
+    -> UPDATE tabela SET nome='HTML5' WHERE id='1' - para modificar o valor de "nome" para 'HTML5' onde o "id" é igual a '1' (também é possível modificar mais de uma coluna ao mesmo tempo em 1 só comando, é só separar as colunas por vírgula e o próximo valor dela)
+        -> UPDATE tabela SET nome='HTML5', ano='2015' WHERE id='1' - para modificar mais de uma coluna ao mesmo tempo
+        -> UPDATE tabela SET nome='HTML5', ano='2015' WHERE ano='2018' LIMIT 1 - para modificar somente 1 registro da 'tabela', pois o parâmetro 'LIMIT' aceita como argumento a quantidade de modificações que serão feitas
+-> DELETE - para deletar uma linha da "tabela"
+    -> DELETE FROM tabela WHERE id='8' - para apagar a linha da 'tabela' com o 'id' igual a '8'
+        -> DELETE FROM tabela WHERE ano='2018' LIMIT 1 - o 'DELETE' também aceita o parâmetro de 'LIMIT'
+-> TRUNCATE - para apagar todos os registros de uma 'tabela'
+    -> TRUNCATE TABLE tabela - apaga todos os registros da 'tabela'
+
+
+
 
 ------- Aula 8 (Gerenciando Cópias de Segurança MySQL) -------
--> 
+-> Para fazer um backup da base de dados no MySQL Workbench é necessário:
+    -> Clicar na guia 'Server'
+    -> Clicar em 'Data Export'
+    -> Selecionar a base de dados que deseja fazer backup e as tabelas (backup do banco de dados é chamado de DUMP)
+        -> Também é possível selecionar se quer guardar somente os dados, somente a estrutura ou os dois, adicionalmente vai ser possível também guardar procedures, evenets e triggers
+        -> Marcar a opção embaixo 'Include Create Schema' para não precisar criar todo o banco de dados antes para voltar o backup caso queira
+    -> Clique em 'Start Export'
+-> Para importar o backup feito no MySQL Workbench é necessário:
+    -> Clicar na guia 'Server'
+    -> Clicar em 'Data Import'
+    -> Navegue e escolha a pasta onde está o arquivo de backup
+    -> Clique em 'Start Import'
 
---- SQL ---
--> 
+
+
 
 ------- Aula 9 (PHPMyAdmin (Parte 1)) -------
 -> 
