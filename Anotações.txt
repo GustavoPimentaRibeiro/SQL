@@ -224,13 +224,60 @@
 -> 
 
 --- SQL ---
--> 
+-> SELECT * FROM tabela WHERE nome LIKE 'p/P%' - para fazer uma seleção com um coringa(%), ele vai selecionar todos os registros da "tabela" que tem "p/P" como sendo inicial da palavra, o '%' substitui nenhum ou vários caracteres, igual a expressão regular
+    -> SELECT * FROM tabela WHERE nome LIKE '%A' - seleciona todas os registros que acabam com "A"
+    -> SELECT * FROM tabela WHERE nome LIKE '%A%' - seleciona todas os registros que tem "A" no meio do "nome", lembrando que '%' pode ser vazio
+        -> SELECT * FROM tabela WHERE nome NOT LIKE '%A%' - seleciona todas os registros que não tem "A" no meio do "nome"
+    -> SELECT * FROM tabela WHERE nome LIKE 'P%P_' - seleciona todos os registros que tenham "P" com sufixo e a penúltima letra, mas que termina com qualquer caractere no final, '_' é um coringa que indica qualquer caractere, mas ele é exatamente 1 caractere
+-> SELECT DISTINCT coluna FROM tabela - seleciona somente os registros únicos da 'coluna' selecionada, por exemplo, se houver o valor 40 para dois registros, então somente o primeiro será selecionado
+-> AGREGAÇÃO:
+    -> SELECT COUNT(*) FROM tabela - para contar os registros que existem na "tabela", pode contar uma 'coluna' também
+        -> SELECT count(*) FROM tabela WHERE coluna > 40 - para contar os registros que existem na "tabela" que tem 'coluna' maior que '40'
+    -> SELECT MAX(coluna) FROM tabela - para pegar o valor máximo da 'coluna' da 'tabela'
+    -> SELECT MIN(coluna) FROM tabela - para pegar o valor mínimo da 'coluna' da 'tabela'
+    -> SELECT SUM(coluna) FROM tabela - para pegar o somatório da 'coluna' da 'tabela'
+    -> SELECT AVG(coluna) FROM tabela - para pegar a média da 'coluna' da 'tabela'
+
+--- EXERCÍCIOS ---
+-> 1 - "Uma lista com o nome de todas as gafanhotas"
+    -> select nome from gafanhotos where sexo in ('f');
+-> 2 - "Uma lista com os dados de todos aqueles que nasceram entre 1/Jan/2000 e 31/Dez/2015"
+    -> select * from gafanhotos where nascimento between '2000-01-01' and '2015-12-31';
+-> 3 - "Uma lista com o nome de todos os homens que trabalham como Programadores"
+    -> select nome from gafanhotos where sexo in ('m') and profissao = 'programador';
+-> 4 - "Uma lista com todos os dados de todas as mulheres que nasceram no Brasil e que têm seu nome iniciando com a letra J"
+    -> select * from gafanhotos where sexo in ('f') and nacionalidade = 'brasil' and nome like 'j%';
+-> 5 - "Uma lista com o nome e nacionalidade de todos os homens que têm Silva no nome, não nasceram no Brasil e pesam menos de 100kg"
+    -> select nome, nacionalidade from gafanhotos where nome like '%silva%' and nacionalidade <> 'Brasil' and peso < '100';
+-> 6 - "Qual é a média de peso dos gafanhotos cadastrados?"
+    -> select avg(peso) from gafanhotos;
+-> 7 - "Qual é o menor peso entre as mulheres que nasceram fora do Brasil e entre 01/Jan/1990 e 31/Dez/2000?"
+    -> select min(peso) from gafanhotos where sexo in ('f') and nacionalidade <> 'Brasil' and nascimento between '1990-01-01' and '2000-12-31';
+
+
+
 
 ------- Aula 13 (SELECT (Parte 3)) -------
--> 
+-> É possível fazer selects aninhados um ao outro para obter melhores resultados
 
 --- SQL ---
--> 
+-> AGRUPAMENTO:
+    -> SELECT coluna FROM tabela GROUP BY coluna - para fazer uma seleção da 'coluna' da 'tabela' que será agrupado pelos valores da 'coluna', ou seja, todos os registros com o mesmo valor de 'coluna' serão agrupados
+        -> SELECT coluna, count(coluna1) FROM tabela GROUP BY coluna HAVING COUNT(coluna1) > 3 - para fazer a seleção agrupada pela 'coluna', mas o 'HAVING' servirá como condicional final, ou seja, todos as outras operações serão executadas e no final de tudo será feito a condicional do 'HAVING'
+-> SELECT coluna, count(coluna1) FROM tabela GROUP BY coluna - para fazer uma seleção da 'coluna' da 'tabela' que será agrupado pelos valores da 'coluna' e contando a quantidade de 'coluna1' para cada agrupamento
+
+--- EXERCÍCIOS ---
+-> 1 - "Uma lista com as profissões dos gafanhotos e seus respectivos quantitativos"
+    -> select profissao, count(profissao) from gafanhotos group by profissao;
+-> 2 - "Quantos gafanhotos homens e quantas mulheres nasceram após 01/Jan/2005"
+    -> select sexo, count(sexo) from gafanhotos where nascimento > '2005-01-01' group by sexo;
+-> 3 - "Uma lista com os gafanhotos que nasceram fora do Brasil, mostrando o país de origem e o total de pessoas nascidas lá. Só nos interessam os países que tiverem mais de 3 gafanhotos com essa nacionalidade"
+    -> select nacionalidade, count(nacionalidade) from gafanhotos where nacionalidade <> 'Brasil' group by nacionalidade having count(nacionalidade) > 3;
+-> 4 - "Uma lista agrupada pela altura dos gafanhotos, mostrando quantas pessoas pesam mais de 100kg e que estão acima da média de altura de todos os cadastrados"
+    -> select altura, count(peso) from gafanhotos where peso > '100' group by altura having altura > (select avg(altura) from gafanhotos);
+
+
+
 
 ------- Aula 14 (Modelo Relacional) -------
 -> 
