@@ -221,7 +221,6 @@
 
 
 ------- Aula 12 (SELECT (Parte 2)) -------
--> 
 
 --- SQL ---
 -> SELECT * FROM tabela WHERE nome LIKE 'p/P%' - para fazer uma seleção com um coringa(%), ele vai selecionar todos os registros da "tabela" que tem "p/P" como sendo inicial da palavra, o '%' substitui nenhum ou vários caracteres, igual a expressão regular
