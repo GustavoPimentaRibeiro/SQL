@@ -279,16 +279,46 @@
 
 
 ------- Aula 14 (Modelo Relacional) -------
--> 
+-> Retângulo é uma Entidade e o Losango é um Relacionamento entre duas Entidades
+-> Diagrama Entidade-Relacionamento para fazer as relações entre entidades
+-> Existe também tipos de Cadinalidade, sendo ela a representação de uma relação:
+    -> Muitos para muitos (n para n) - quando há a relação de uma entidade ter muitas ocorrências na outra entidade e também o contrário
+        -> Cria-se uma nova Entidade da relação entre os dois
+        -> Há chave estrangeira das duas Entidades nesta nova Entidade de relação
+        -> Na nova relação será lido um para muitos e muitos para um (relação entre as 3 Entidades)
+    -> Um para um (1 para 1) - quando há a relação de uma entidade ter uma ocorrência na outra entidade e também o contrário
+        -> Você decide qual lado a chave estrangeira irá ficar
+    -> Um para muitos (1 para n) - quando há a relação de uma entidade ter uma ocorrência na outra entidade e muitas ocorrências no contrário
+        -> A chave estrangeira fica do lado da entidade 'n'
+    -> Muitos para um (n para 1) - quando há a relação de uma entidade ter várias ocorrências na outra entidade e uma ocorrência no contrário
+        -> A chave estrangeira fica do lado da entidade 'n'
 
---- SQL ---
--> 
+
+
 
 ------- Aula 15 (Chaves Estrangeiras e JOIN) -------
--> 
+-> InnoDB é uma factory(Engine) de criação de tabelas que pertence a Oracle, e ela suporta chaves estrangeiras
+-> Algumas Engines são conhecidas:
+    -> MylSAM - não suporta ACID (regras de uma boa transação)
+    -> InnoDB - suporta ACID (regras de uma boa transação)
+    -> XtraDB - suporta ACID (regras de uma boa transação)
+-> A sigla ACID quer dizer:
+    -> Atomicidade - não pode ser subdividida em subtarefas, ou tudo ocorre, ou nada ocorre
+    -> Consistência - a transação não pode afetar o banco de nenhuma forma, se o banco estava ok, então deve continuar ok
+    -> Isolamento - nenhuma transação pode interferir na outra
+    -> Durabilidade - toda transação tem que ser durável enquanto precisar daquela informação
+-> Dentro de um relacionamento não é possível apagar uma referência da chave estrangeira de forma direta, só será possível caso não exista nenhuma relação daquele elemento com outra 'tabela'
 
 --- SQL ---
--> 
+-> ALTER TABLE tabela ADD FOREIGN KEY(coluna) REFERENCES tabela1(coluna1) - para adicionar uma chave estrangeira que será indicada pela 'coluna' na 'tabela' que terá relação com a 'coluna1' da 'tabela1'
+-> SELECT tabela1.coluna1, tabela2.coluna1 FROM tabela1 INNER JOIN tabela2 ON tabela1.id = tabela2.id - para fazer uma seleção com junção de tabelas, sendo elas a 'tabela1' e 'tabela2', esta junção foi feita através do 'id' da 'tabela1' e o 'id' da 'tabela2' (não precisa do "INNER" caso queira fazer um "INNER JOIN", é só utilizar o "JOIN")
+-> SELECT t1.coluna1, t2,coluna1 FROM tabela1 AS t1 INNER JOIN tabela2 AS t2 ON t1.id = t2.id - para simplificar o nome das tabelas é possível utilizar um ALIAS, que é representado por 'AS' depois da tabela referenciada, funciona para as duas tabelas
+
+-> SELECT t1.coluna1, t2.coluna1 FROM tabela1 AS t1 LEFT OUTER JOIN tabela2 AS t2 ON t1.id = t2.id - para fazer uma seleção de junção de tabelas, porém ela da prioridade para a 'tabela' da esquerda do 'JOIN' (tabela1) para mostrar os dados, ou seja, ele vai mostrar todos os tipos de referências, não somente as que correlacionaram depois do 'ON'
+-> SELECT t1.coluna1, t2.coluna1 FROM tabela1 AS t1 RIGHT OUTER JOIN tabela2 AS t2 ON t1.id = t2.id - para fazer uma seleção de junção de tabelas, porém ela da prioridade para a 'tabela' da direita do 'JOIN' (tabela2) para mostrar os dados, ou seja, ele vai mostrar todos os tipos de referências, não somente as que correlacionaram depois do 'ON'
+
+
+
 
 ------- Aula 16 (INNER JOIN com várias tabelas) -------
 -> 
