@@ -321,7 +321,18 @@
 
 
 ------- Aula 16 (INNER JOIN com várias tabelas) -------
--> 
 
 --- SQL ---
--> 
+-> CREATE TABLE nova_tabela(
+    id int not null auto_increment,
+    idt int,
+    idf int,
+    primary key(id),
+    foreign key(idt) references tabela1(id),
+    foreign key(idf) references tabela2(id)
+    ) DEFAULT CHARSET = utf8mb4 - isto é para a criação de uma nova tabela com relacionamento 'n para n' e suas configurações para duas chaves estrangeiras que vem de duas tabelas diferentes
+-> SELECT t1.coluna, t2.coluna FROM tabela1 AS t1
+    join tabela2 AS t2
+    ON t1.id = t2.id
+    JOIN tabela3 AS t3
+    ON t3.id = t2.id - para fazer mais de um join, no caso, mostrar dois campos de tabelas diferentes vindo de um relacionamento 'n para n'
